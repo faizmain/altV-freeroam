@@ -48,7 +48,7 @@ class GunGameServer {
   private scoreBoard: Map<number, GunGameScore> = new Map();
 
   constructor() {
-    alt.on("playerConnect", (player: Player) => this.playerJoin(player));
+    alt.onClient("gunGame::playerJoin", (player: Player) => this.playerJoin(player));
     alt.on("playerDeath", (player: Player, killer: Player, weapon: number) => this.playerDeath(player, killer, weapon));
     alt.on("playerDisconnect", (player: Player) => this.playerLeave(player));
 
@@ -77,6 +77,7 @@ class GunGameServer {
     this.scoreBoard.set(player.id, { score: 0 });
 
     this.playerRespawn(player);
+    alt.emitClient(null, 'gunGame::updateOnline', alt.Player.all.length++);
   }
 
   private playerUpdateScore(player: Player, weapon: number): void {
@@ -112,6 +113,7 @@ class GunGameServer {
       player.removeAllWeapons();
 
       setTimeout(() => this.playerRespawn(player), 2000);
+      alt.emitClient(null, 'gunGame::updateKillList', killer.name, player.name, weapon)
       this.playerUpdateScore(killer, weapon);
     }
   }
@@ -122,6 +124,7 @@ class GunGameServer {
       this.scoreBoard.delete(player.id);
 
       alt.emitClient(null, "gunGame::updateScoreBoard", this.scoreBoard);
+      alt.emitClient(null, 'gunGame::updateOnline', alt.Player.all.length--);
     }
   }
 }
