@@ -1,4 +1,4 @@
-# native-db
+# freeroam
 
 ## Project setup
 ```
