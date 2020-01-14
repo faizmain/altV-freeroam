@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "lib": ["esnext"],
+    "outDir": "_dist",
+    "module": "CommonJS",
+    "incremental": true,
+    "allowJs": true,
+    "moduleResolution": "node",
+    "target": "esnext",
+    "importHelpers": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "removeComments": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "preserveConstEnums": true,
+    "sourceMap": false,
+    "strict": false,
+    "baseUrl": "./",
+    "rootDir": "./",
+    "types": [
+      "@altv/types"
+    ]
+  },
+  "include": ["."]
+}

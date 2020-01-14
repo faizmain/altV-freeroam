@@ -1,0 +1,8 @@
+node_modules
+crashdumps
+data
+modules
+cache
+altv-server.exe
+libnode.dll
+server.log
